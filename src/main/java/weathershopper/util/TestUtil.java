@@ -12,38 +12,33 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.util.Date;
 
-
-
-
+//This Is Utility Class for Capturing Screnshot
 public class TestUtil extends BaseClass {
+    static String destination;
 
-    public static String takeScreenshotAtEndOfTest() throws IOException{
+    public static String takeScreenshotAtEndOfTest() {
 
-        System.out.println("take Screenshot");
+        try {
 
-      LocalDateTime localDateTime = LocalDateTime.now();
-        String currDate = localDateTime.toString();
-        String screenshotname =  driver.getTitle() + ".png";
+            LocalDateTime localDateTime = LocalDateTime.now();
+            String dateName = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+            String screenshotname = driver.getTitle() + dateName + ".jpeg";
+            destination = System.getProperty("user.dir") + "/src/test/TestOutput/" + screenshotname;
+            TakesScreenshot ts = (TakesScreenshot) driver;
+            File source = ts.getScreenshotAs(OutputType.FILE);
+            File finalDestination = new File(destination);
+            FileUtils.copyFile(source, finalDestination, true);
 
-        String destination = "C://Users//admin//IdeaProjects//weathershopper//src//test//TestOutput//" + screenshotname;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
 
-//                "." + File.separator + "src" + File.separator +  "test" + File.separator + "TestOutput" + File.separator + "screenshot_" + currDate +
-//                 ".png";
+        return destination;
 
-        System.out.println(destination);
-
-
-
-       TakesScreenshot ts = (TakesScreenshot) driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        File finalDestination = new File(destination);
-        System.out.println("File Exception");
-        FileUtils.copyFile(source, finalDestination);
-
-    return destination;
     }
-
 
 }

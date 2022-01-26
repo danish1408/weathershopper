@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
-
+/* It is Base Class that is used to to read the Configuation parameters and initialize browser */
 public class BaseClass {
 
     public static WebDriver driver;
@@ -23,17 +23,15 @@ public class BaseClass {
     public static String lower_temp;
     public static String high_temp;
 
+    /* BsseClass Constructer */
 
   public  BaseClass() {
 
         try {
-
             prop = new Properties();
 
             FileInputStream fls = new FileInputStream(path);
             prop.load(fls);
-
-
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -41,7 +39,6 @@ public class BaseClass {
             e.printStackTrace();
         }
     }
-
     public static void initialization() {
         String browserName = prop.getProperty("browser");
        lower_temp =  prop.getProperty("lowerTemp");
@@ -56,14 +53,12 @@ public class BaseClass {
             WebDriverManager.edgedriver().setup();
             driver = new EdgeDriver();
         }
-
         driver.manage().window().maximize();
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(200, TimeUnit.SECONDS);
 
         driver.get(prop.getProperty("url"));
-
 
     }
 

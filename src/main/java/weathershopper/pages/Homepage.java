@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import weathershopper.base.BaseClass;
-
+//Page Object Factory for HomePage
    public class Homepage extends BaseClass {
     @FindBy(xpath= "//*[@id=\"temperature\"]")
     WebElement temperature;
